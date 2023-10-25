@@ -8,12 +8,15 @@
     <title>Fisheye</title>
   </head>
   <body>
+    <!-- Etape#3_ ajout de l'attribut role pour indiquer que nous sommes sur la bannière -->
     <header>
         <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
         <h1>Nos photographes</h1>
     </header>
-    <main id="main">
-        <div class="photographer_section"></div>
+    <!-- Etape#3_ ajout de l'attribut role pour indiquer que nous sommes sur le contenu principal -->
+    <main id="main" role="main">
+        <!-- Etape#3_ajout balise aria-label -->
+        <div class="photographer_section" aria-label="affichage des photographes"></div>
     </main>
     <!-- Il manquait un point slash devant pour intégrer les scripts -->
     <script src="./scripts/templates/photographer.js"></script>

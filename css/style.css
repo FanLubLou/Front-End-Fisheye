@@ -1,5 +1,16 @@
 @import url("photographer.css");
 
+h1,
+h2,
+h3,
+p{
+    margin: 0;
+}
+h4{
+    margin: 10px;
+    
+}
+
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
@@ -17,6 +28,10 @@ header {
 h1 {
     color: #901C1C;
     margin-right: 100px;
+}
+
+h3 {
+    color: #901C1C;
 }
 
 .logo {
@@ -44,7 +59,31 @@ h1 {
     font-size: 36px;
 }
 
-.photographer_section article img {
+.image-container {
     height: 200px;
     width: 200px;
+    position: relative;
+    border-radius: 100px;
+    overflow: hidden;
+    background: #C4C4C4;
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25));
+    
+}
+
+
+.photographer_section article img {
+    height: 170%;
+    width: 170%;
+    object-fit:cover;
+    position : absolute;
+    left: -70px;
+    top: -30px;
+    
+    /* Je passe ses valeurs dans le containeur parent */ 
+    /* height: 200px;
+    width: 200px; */
+    /* object-fit:cover; */
+    /* /* Etape#2 Intégration des données    */
+    
+    
 }
