@@ -7,9 +7,11 @@ p{
     margin: 0;
 }
 h4{
-    margin: 10px;
-    
+    margin: 10px;    
 }
+a {
+    text-decoration: none;
+  }
 
 body {
     font-family: "DM Sans", sans-serif;
@@ -83,7 +85,15 @@ h3 {
     /* height: 200px;
     width: 200px; */
     /* object-fit:cover; */
-    /* /* Etape#2 Intégration des données    */
-    
-    
+    /* /* Etape#2 Intégration des données    */ 
+
 }
+
+.photographer-card-link {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    text-align: center;
+  }
