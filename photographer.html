@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <title>Fisheye - photographes _ JC</title>
   </head>
   <body>
     <!-- Etape#3_ ajout de l'attribut role pour indiquer que nous sommes sur la bannière -->
@@ -21,12 +21,12 @@
     </header>
     <!-- Etape#3_ajout de l'attribut aria-label-->
     <main id="main" role="main">
-      
-      <div class="photograph-header">
-        <!-- Etape#3_ajout des attributs aria-label et role-->
-        <button role="button" class="contact_button" onclick="displayModal()" aria-label="Contactez-moi">Contactez-moi</button>
-      </div>
+      <!-- Etap#5 Ici viendront s'afficher la section photograph-header puis le menu déroulant -->
+      <!-- Etap#5 Ici viendra s'afficher la section destinée aux media -->       
     </main>
+
+
+
     <div id="contact_modal" role="dialog">
 			<div class="modal">
 				<header>
@@ -42,8 +42,10 @@
 				</form>
 			</div>
 		</div>
+
+
     <!-- Il manquait un point slash devant pour intégrer les scripts -->
-    <script src="./scripts/pages/photographer.js"></script>
+    <script type="module" src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
   </body>
 </html>

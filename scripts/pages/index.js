@@ -7,7 +7,7 @@ async function getPhotographers() {
         const photographers = await reponse.json();
         return photographers;
     } catch (error) {
-        console.error("Une erreur s'est produite lors de la récupération des photographes :", error);
+        console.error("Une erreur s'est produite lors de la récupération des informations des photographes :", error);
     }
 }
     
@@ -32,11 +32,7 @@ async function displayData(photographers) {
     async function init() {
         // Récupère les datas des photographes
         const { photographers } = await getPhotographers();
-        displayData(photographers);
-
-        console.log(photographers);
-        console.log(photographers[0])
-        console.log(photographers[0].name)            
+        displayData(photographers);              
         
 
     }
