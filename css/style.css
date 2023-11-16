@@ -3,7 +3,20 @@
 *****************************************/
 *{
    box-sizing: border-box; 
+   margin: 0;
+   padding: 0;
 }
+
+h1,
+h2,
+h3,
+h4,
+p{
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
 
 h1,
 h2,
@@ -19,7 +32,8 @@ a{
 }
 
 main{
-margin: 0 auto;
+    margin: 0 auto;
+    
 }
 
 /*****************************************
@@ -32,41 +46,70 @@ body {
     font-size: 1.6rem;
     width: 80%;
 }
+
 html,
 body {
   height: 100%;
 }
+
 header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    padding: 2em 0;
 }
 
 h1 {
     color: #901C1C;
-    margin-right: 100px;
+    /* margin-right: 100px; */
+}
+
+h2 {
+    color: #D3573C;
+    font-size: 2.25rem;
+    
+
 }
 
 h3 {
     color: #901C1C;
+    font-size: O.813px;
+   }
+
+h4 {
+    color: #000;
+    font-size: 0.625rem;
+}
+
+p {
+    color: #757575;
+    text-align: center;
+    font-size: 0.563rem;
 }
 
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 /*****************************************
 * PAGE D ACCUEIL _ STYLES SPECIFIQUES
 *****************************************/
 
+.title {
+    color: #901c1c;
+    font-size: 2.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 70px;
-    margin-top: 100px;
+    column-gap: 17.625rem;
+    row-gap: 5rem;
+    margin-top: 6.25px;
 }
 
 .photographer_section article {
@@ -77,10 +120,7 @@ h3 {
     flex-direction: column;
 }
 
-.photographer_section article h2 {
-    color: #D3573C;
-    font-size: 36px;
-}
+
 
 .image-container {
     height: 200px;
@@ -110,9 +150,21 @@ h3 {
     text-decoration: none;
     text-align: center;
   }
+
+
+/***************************************************************************************
+* PAGE PHOTOGRAPHE _ STYLES SPECIFIQUES
+****************************************************************************************/
+
+
   #contact_modal {
     display: none;
 }
+
+/*****************************************
+* PAGE PHOTOGRAPHE _ HEADER & Son contenu
+*****************************************/
+
 
 .photograph-header {
     display: flex;
@@ -120,18 +172,18 @@ h3 {
     justify-content: space-between;
     align-items: center;
     background-color: #fafafa;
-    height: 30rem;
-    padding: 3em;
+    height: 20rem;
+    padding: 3.125rem;
     margin-bottom: 2em;
 }
 
 .contact_button {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
     color: white;
     padding: 11px;
     width: 170px;
-    height: 70px;
+    height: 69px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
@@ -140,56 +192,93 @@ h3 {
 .photograph-info {
     display: flex;
     flex-flow: column nowrap;
+    align-items: flex-start;
+    
 }
-.photographer-name {
+.photograph-name {
     color: #d3573c;
-    font-weight: 400;
-    font-size: 3.6rem;
+    font-size: 4rem;
 }
-.photographer-location {
+.photograph-location {
 color: #901c1c;
 font-weight: 400;
 font-size: 2rem;
 }
-.photographer-tagline {
+.photograph-tagline {
 color: #000000;
 font-weight: 400;
-font-size: 1.5rem;
+font-size: 1.125rem;
+margin-top: 1rem;
 }
-.photographer-img {
-    height: 20rem;
-    width: 20rem;
+.photograph-img {
+    height: 12.5rem;
+    width: 12.5rem;
     -o-object-fit: cover;
        object-fit: cover;
     border-radius: 50%;
     margin-bottom: 1em;
   }
+
+  /*****************************************
+* PAGE PHOTOGRAPHE _ La partie tri
+*****************************************/
+
+.sortingOut-Comment {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
 .sortingout{
     display: flex;
     flex-direction: row;
     gap: 25px;
-    padding-left: 3em;
+    align-items: center;
 }
+.dropdown {
+    width: 10.625rem;
+    height: 3.5rem;
+    background-color: #901c1c;
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border: 1rem solid #901c1c; 
+}
+  
+.dropdown-options {
+    font-family: "DM Sans";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.125rem;
+    background-color: #901c1c;
+    color: #ffffff;
+  }
+
+
+
 /*****************************************
 * ELEMENTS CSS SECTION ET MEDIA
 *****************************************/
 
 .media-section {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 35rem);
+    grid-template-columns: repeat(auto-fill, 20rem);
     justify-content: space-between;
-    gap: 2em 1em;
+    gap: 2rem 1rem;
     padding: 2em 0;
   }
   .media-card {
     display: flex;
     flex-flow: column nowrap;
     width: 35rem;
+    max-width: 350px;
   }
   .media-card-button {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    max-width: 350px;
+    
   }
   .media-card-img, .media-card-video {
     width: 35rem;
@@ -197,6 +286,8 @@ font-size: 1.5rem;
     -o-object-fit: cover;
        object-fit: cover;
     border-radius: 0.5rem;
+    max-width: 350px;
+    max-height: 300px;
   }
   .media-card-info {
     display: flex;
@@ -234,27 +325,6 @@ font-size: 1.5rem;
 
 
 
-
-
-
-.dropdown {
-    width: 19rem;
-    height: 7rem;
-    background-color: #901c1c;
-    color: #ffffff;
-    font-size: 2rem;
-    font-weight: 700;
-    border-radius: 0.5rem;
-    border: 2rem solid #901c1c;
-  }
-  .dropdown-options {
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.8rem;
-    background-color: #901c1c;
-    color: #ffffff;
-  }
 .modal {
     border-radius: 5px;
     background-color: #DB8876;

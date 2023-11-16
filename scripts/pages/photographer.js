@@ -20,32 +20,30 @@ function displayphotographer(data, data_bis) {
     // On affiche le header 
     mainElt.innerHTML += `
     <section class="photograph-header">
-      <div class="photographer-info">
-        <h1 class="photographer-name">${name}</h1>
-        <p class="photographer-location">${city}, ${country}</p>
-        <p class="photographer-tagline">${tagline}</p>
+      <div class="photograph-info">
+        <h1 class="photograph-name">${name}</h1>
+        <p class="photograph-location">${city}, ${country}</p>
+        <p class="photograph-tagline">${tagline}</p>
       </div>
       <button class="contact_button" id="contactBtn" aria-label="Bouton d'ouverture du modal de contact">Contactez-moi</button>
-      <img class="photographer-img" src="assets/photographers/${portrait}" alt="Photo de ${name}">
+      <img class="photograph-img" src="assets/photographers/${portrait}" alt="Photo de ${name}">
     </section>
   `;
     // on affiche le menu déroulant
     mainElt.innerHTML += `
     <section class="sortingout">
-        <p> Trier par </p>
+        <p class="sortingOut-Comment"> Trier par </p>
         <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
-        <option class="dropdown-options" value=""> Trier par </option>
-        <option class="dropdown-options" value="Popularité">Popularité</option>
-        <option class="dropdown-options" value="Date">Date</option>
-        <option class="dropdown-options" value="Titre">Titre</option>
+          <option class="dropdown-options" value="Popularité">Popularité</option>
+          <option class="dropdown-options" value="Date">Date</option>
+          <option class="dropdown-options" value="Titre">Titre</option>
         </select>
-    <section>
+    </section>
   `;
   // On va afficher les media
   mainElt.innerHTML += `
   <section class="media-section" aria - label="affichage des photographes">
-  <section>
-  `
+  </section>  `
   ;      
 
   // La section media-section est déjà créée dans le HTML
@@ -64,6 +62,7 @@ function displayphotographer(data, data_bis) {
 }
 
 displayphotographer(photographerInfo, photographerMedia);
+
 
 
 
