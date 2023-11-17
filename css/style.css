@@ -274,8 +274,10 @@ select:focus {
     font-size: 1.125rem;
     background-color: #901c1c;
     color: #ffffff;
-    width: 100%;
+    width: 10.625rem;
+    height: 3.5rem;
     /* height: 10rem; */
+    outline: none;
     border-radius: 0.5rem;
     border: 1rem solid #901c1c
     

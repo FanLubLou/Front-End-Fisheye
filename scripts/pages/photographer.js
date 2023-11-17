@@ -9,63 +9,86 @@ const photographerInfo = await getPhotographerInfo();
 const photographerMedia = await getPhotographerMedia();
 console.log(photographerMedia)
 
+  /*****************************************
+* AFFICHAGE des SECTIONS
+*****************************************/
 
-//On affiche dans la section Header
-
-function displayphotographer(data, data_bis) {
-    //on destructure pour retrouver les propriétés dont nous allons avoir besoin
-    const { name, city, country, tagline, portrait } = data;
-    //On récupère main
-    const mainElt = document.querySelector("main");
-    // On affiche le header 
-    mainElt.innerHTML += `
-    <section class="photograph-header">
-      <div class="photograph-info">
-        <h1 class="photograph-name">${name}</h1>
-        <p class="photograph-location">${city}, ${country}</p>
-        <p class="photograph-tagline">${tagline}</p>
-      </div>
-      <button class="contact_button" id="contactBtn" aria-label="Bouton d'ouverture du modal de contact">Contactez-moi</button>
-      <img class="photograph-img" src="assets/photographers/${portrait}" alt="Photo de ${name}">
-    </section>
-  `;
-    // on affiche le menu déroulant
-    mainElt.innerHTML += `
-    <section class="sortingout">
-        <p class="sortingOut-Comment"> Trier par </p>
-        <div class="select_container">
-          <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
-            <option class="dropdown-options" value="Popularité">Popularité</option>
-            <option class="dropdown-options" value="Date">Date</option>
-            <option class="dropdown-options" value="Titre">Titre</option>
-          </select>          
-          <i class="fa-solid fa-chevron-down"></i>
-          <i class="fa-solid fa-chevron-up hidden"></i>          
-        </div>  
-    </section>
-  `;
-  // On va afficher les media
+// Definition des fonctions d affichage des trois sections séparément
+function displayFirstSection(data) {
+   //on destructure pour retrouver les propriétés dont nous allons avoir besoin
+   const { name, city, country, tagline, portrait } = data;
+   //On récupère main
+   const mainElt = document.querySelector("main");
+   // On affiche le header 
+   mainElt.innerHTML += `
+   <section class="photograph-header">
+     <div class="photograph-info">
+       <h1 class="photograph-name">${name}</h1>
+       <p class="photograph-location">${city}, ${country}</p>
+       <p class="photograph-tagline">${tagline}</p>
+     </div>
+     <button class="contact_button" id="contactBtn" aria-label="Bouton d'ouverture du modal de contact">Contactez-moi</button>
+     <img class="photograph-img" src="assets/photographers/${portrait}" alt="Photo de ${name}">
+   </section>
+ `;
+}
+function displaySecondSection() {
+  //On récupère main
+  const mainElt = document.querySelector("main");
+  // on affiche le menu déroulant
   mainElt.innerHTML += `
-  <section class="media-section" aria - label="affichage des photographes">
-  </section>  `
-  ;      
-
-  // La section media-section est déjà créée dans le HTML
-  const mediaSection = document.querySelector(".media-section")
-  
-  // Iterate through each media item in the array
-  data_bis.forEach((media) => {
-    // Create a media card model object from the media array
-    const mediaCardModel = mediaFactory(media);
-    // Get the DOM element for the media card
-    const mediaCardDOM = mediaCardModel.getMediaCardDOM();
-    // Add the card to the media section
-    
-    mediaSection.append(mediaCardDOM);
-  });
+  <section class="sortingout">
+      <p class="sortingOut-Comment"> Trier par </p>
+      <div class="select_container">
+        <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
+          <option class="dropdown-options" value="Popularité">Popularité</option>
+          <option class="dropdown-options" value="Date">Date</option>
+          <option class="dropdown-options" value="Titre">Titre</option>
+        </select>          
+        <i class="fa-solid fa-chevron-down"></i>
+        <i class="fa-solid fa-chevron-up hidden"></i>          
+      </div>  
+  </section>
+`;
+}
+function displayThirdSection(data) {
+  //On récupère main
+  const mainElt = document.querySelector("main");
+  // On créé la section mediaSection
+  // Ici, on créé la section differemment des deux premières car la méthode précédente ne fonctionne pas en dynamique
+  const mediaSection = document.createElement("div");
+  mediaSection.className = "media-section";
+  // On parcourt le tableau reçu
+  data.forEach((media) => {
+      // Créer un modèle de cartes       
+      const mediaCardModel = mediaFactory(media);
+      // On récupère l'élément DOM
+      const mediaCardDOM = mediaCardModel.getMediaCardDOM();
+      // On ajoute la carte à mediaSection
+      mediaSection.append(mediaCardDOM);
+      mainElt.append(mediaSection)
+    });
 }
 
-displayphotographer(photographerInfo, photographerMedia);
+//Définition de la fonction générale d'affichage
+async function displayAll(data, databis) {
+  displayFirstSection(data);
+  displaySecondSection();
+  displayThirdSection(databis); 
+  //Appel de la fonction de tri sur l'evenement "change"
+const dropdownMenu = document.getElementById("dropdownMenu");
+dropdownMenu.addEventListener("change", sortMediaSection);
+}
+// Appel de la fonction générale d'affichage
+displayAll (photographerInfo,photographerMedia)
+
+  /*****************************************
+* PARTIE TRI
+*****************************************/
+
+  /*******************
+* Gestion du sens du chevron
+**********************/
 
 // Fonction de gestion du sens du chevron pour le menu déroulant
 //On récupère les éléments du DOM
@@ -75,8 +98,9 @@ const dropdownState = document.querySelector(".dropdown");
 
 //On écoute le menu déroulant pour savoir s'il est déplié ou non
 dropdownState.addEventListener("focus", chevronUpfct);
-
-
+dropdownState.addEventListener("focus", function (event) {
+  console.log('Nouvelle option sélectionnée:', event.target.value)
+});
 dropdownState.addEventListener("input", chevronDownfct);
 dropdownState.addEventListener("change", chevronDownfct);
 dropdownState.addEventListener("blur", chevronDownfct);
@@ -94,7 +118,58 @@ function chevronDownfct() {
   chevronDown.classList.remove("hidden")
 }
 
-console.log(dropdownState)
+  /*******************
+* TRI
+**********************/
+
+// Definition de la fonction de tri destinée à être appelée par un eventlistener
+async function sortMediaSection() {
+  // Retrieve the selected option value
+  const selectedOption = this.value;
+  console.log("selectedOption",selectedOption)
+
+  // Tri par popularité
+  if (selectedOption == "Popularité") {
+    await photographerMedia.sort((a, b) => {
+      return b.likes - a.likes;
+    });
+  }
+
+  // Tri par Date. A noter l'utilisation de new afin de créer des objets à comparer à partir des valeurs de date stockées
+  if (selectedOption == "Date") {
+    await photographerMedia.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+  }
+
+  // Tri alphabétique. Renvoie -1 pour placer a avant b et vice et versa. 0 pour des titres égaux
+  if (selectedOption == "Titre") {
+    await photographerMedia.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  // Retrait de la précédente section media-section
+  const mediaSection = document.querySelector(".media-section");
+  mediaSection.remove();
+
+  // Nouvel affichage en fonction du nouveau tableau photographerMedia
+    displayThirdSection(photographerMedia);
+
+}
+
+//Appel de la fonction de tri sur l'evenement "change"
+const dropdownMenu = document.getElementById("dropdownMenu");
+dropdownMenu.addEventListener("change", sortMediaSection);
+dropdownMenu.addEventListener("change", function (event) {
+  console.log('Nouvelle option sélectionnée:', event.target.value)
+});
 
 
 
