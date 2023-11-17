@@ -27,8 +27,19 @@ p{
 h4{
     margin: 10px;    
 }
-a{
+a {
     text-decoration: none;
+}
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+ }
+
+ select:focus
+{
+    outline: none;
 }
 
 main{
@@ -222,37 +233,79 @@ margin-top: 1rem;
   /*****************************************
 * PAGE PHOTOGRAPHE _ La partie tri
 *****************************************/
-
-.sortingOut-Comment {
-    font-size: 1.125rem;
-    font-weight: 700;
-}
-
 .sortingout{
     display: flex;
     flex-direction: row;
     gap: 25px;
     align-items: center;
+    
 }
-.dropdown {
+
+.sortingOut-Comment {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+.select_container {
+    display: flex;
+    align-items: center;
     width: 10.625rem;
     height: 3.5rem;
     background-color: #901c1c;
     color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1rem solid #901c1c
+}
+
+.dropdown {
+    background-color: transparent;
+    color: #ffffff;
     font-size: 1.125rem;
     font-weight: 700;
-    border-radius: 0.5rem;
-    border: 1rem solid #901c1c; 
+    border: transparent;
+            
 }
   
-.dropdown-options {
+/* .dropdown-options */
+select:focus {
+    /* position: relative; */
     font-family: "DM Sans";
     font-style: normal;
     font-weight: 700;
     font-size: 1.125rem;
     background-color: #901c1c;
     color: #ffffff;
+    width: 100%;
+    /* height: 10rem; */
+    border-radius: 0.5rem;
+    border: 1rem solid #901c1c
+    
   }
+
+.fa-solid {
+    position: absolute;
+    left: 350px;
+    margin-left: 20px;
+    /* z-index: 100; */
+}
+
+
+.fa-chevron-down {     
+    color: white;
+    
+    font-size: 1.25rem;
+}
+
+.fa-chevron-up {
+    /* position: relative; */
+    color: white;
+    font-size: 1.25rem;
+    /* left: 8px;  */
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
 
 
 

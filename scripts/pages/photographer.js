@@ -33,11 +33,15 @@ function displayphotographer(data, data_bis) {
     mainElt.innerHTML += `
     <section class="sortingout">
         <p class="sortingOut-Comment"> Trier par </p>
-        <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
-          <option class="dropdown-options" value="Popularité">Popularité</option>
-          <option class="dropdown-options" value="Date">Date</option>
-          <option class="dropdown-options" value="Titre">Titre</option>
-        </select>
+        <div class="select_container">
+          <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
+            <option class="dropdown-options" value="Popularité">Popularité</option>
+            <option class="dropdown-options" value="Date">Date</option>
+            <option class="dropdown-options" value="Titre">Titre</option>
+          </select>          
+          <i class="fa-solid fa-chevron-down"></i>
+          <i class="fa-solid fa-chevron-up hidden"></i>          
+        </div>  
     </section>
   `;
   // On va afficher les media
@@ -62,6 +66,35 @@ function displayphotographer(data, data_bis) {
 }
 
 displayphotographer(photographerInfo, photographerMedia);
+
+// Fonction de gestion du sens du chevron pour le menu déroulant
+//On récupère les éléments du DOM
+const chevronDown = document.querySelector(".fa-chevron-down");
+const chevronUp = document.querySelector(".fa-chevron-up");
+const dropdownState = document.querySelector(".dropdown");
+
+//On écoute le menu déroulant pour savoir s'il est déplié ou non
+dropdownState.addEventListener("focus", chevronUpfct);
+
+
+dropdownState.addEventListener("input", chevronDownfct);
+dropdownState.addEventListener("change", chevronDownfct);
+dropdownState.addEventListener("blur", chevronDownfct);
+
+
+
+//On écrit les fonctions qui retire ou ajoute la classe hidden en fonction
+function chevronUpfct() {
+  chevronDown.classList.add("hidden")
+  chevronUp.classList.remove("hidden")
+}
+
+function chevronDownfct() {
+  chevronUp.classList.add("hidden")
+  chevronDown.classList.remove("hidden")
+}
+
+console.log(dropdownState)
 
 
 
