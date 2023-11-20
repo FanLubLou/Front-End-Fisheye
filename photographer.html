@@ -26,27 +26,40 @@
       <!-- Etap#5 Ici viendra s'afficher la section destinée aux media -->       
     </main>
 
+    <!-- Etape#6 _ Insertion de la modale -->
+    <div class="bground">
+      <dialog class="modal" id="contact_modal" role="dialog">			
+          <header class="modal-header">
+            <h2 class="modal-title"></h2>
+            <button class="modal-close" aria-label="Bouton de fermeture du modal de contact" id="modalCloseBtn">
+            <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre" />
+          </button>
+          </header>
+          <form class="modal-form" id="modalForm">
+            <label class="modal-label" for="firstName">Prénom</label>
+            <input class="modal-input" type="text" id="firstName" name="firstName" minlength="2" required><br>
 
+            <label class="modal-label" for="lastName">Nom</label>
+            <input class="modal-input" type="text" id="lastName" name="lastName" minlength="2" required><br>
 
-    <div id="contact_modal" role="dialog">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" alt="Fermer la fenêtre" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<!-- <input /> -->
-					</div>
-          <button role="button" class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+            <label class="modal-label" for="email">E-mail</label>
+            <input class="modal-input" type="email" id="email" name="email" required><br>  
+
+            <label class="modal-label" for="message">Votre message</label>
+            <input class="modal-input modal-msg" type="text" id="message" name="message" minlength="10" maxlength="100" required><br>
+
+            <button role="button" class="contact_button">Envoyer</button>
+          </form>			
+      </dialog>
+  </div>
 
 
     <!-- Il manquait un point slash devant pour intégrer les scripts -->
     <script type="module" src="./scripts/pages/photographer.js"></script>
     <script src="./scripts/utils/contactForm.js"></script>
+
+    <!-- A retirer plus tard -->
+    <footer></footer>
+
   </body>
 </html>

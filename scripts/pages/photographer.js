@@ -27,7 +27,7 @@ function displayFirstSection(data) {
        <p class="photograph-location">${city}, ${country}</p>
        <p class="photograph-tagline">${tagline}</p>
      </div>
-     <button class="contact_button" id="contactBtn" aria-label="Bouton d'ouverture du modal de contact">Contactez-moi</button>
+     <button class="contact_button" id="contactModalBtn" aria-label="Bouton d'ouverture du modal de contact">Contactez-moi</button>
      <img class="photograph-img" src="assets/photographers/${portrait}" alt="Photo de ${name}">
    </section>
  `;
@@ -75,9 +75,7 @@ async function displayAll(data, databis) {
   displayFirstSection(data);
   displaySecondSection();
   displayThirdSection(databis); 
-  //Appel de la fonction de tri sur l'evenement "change"
-const dropdownMenu = document.getElementById("dropdownMenu");
-dropdownMenu.addEventListener("change", sortMediaSection);
+  
 }
 // Appel de la fonction générale d'affichage
 displayAll (photographerInfo,photographerMedia)
@@ -119,12 +117,15 @@ function chevronDownfct() {
 }
 
   /*******************
-* TRI
+* TRI _ Etape 9 : Créer le système de tri
+Basé sur le cours "Manipulez les listes en JavaScript"
+https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911102-manipulez-les-listes-en-javascript
+
 **********************/
 
 // Definition de la fonction de tri destinée à être appelée par un eventlistener
 async function sortMediaSection() {
-  // Retrieve the selected option value
+  // Récupération de la valeur choisie par l'utilisateur du <select> _ Menu déroulant
   const selectedOption = this.value;
   console.log("selectedOption",selectedOption)
 
@@ -171,6 +172,60 @@ dropdownMenu.addEventListener("change", function (event) {
   console.log('Nouvelle option sélectionnée:', event.target.value)
 });
 
+  /*******************
+* MODALE _ Etape 6 : Créer la modale de contact
+**********************/
 
+/*******************
+Basé sur le cours "Manipulez les listes en JavaScript"
+https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-avec-javascript/7911102-manipulez-les-listes-en-javascript
 
+**********************/
 
+//Récupération des élts du DOM
+//Ici pour avoir l'information du clic déclenchant l'apparition de la modale
+const ModalBtn = document.getElementById("contactModalBtn");
+
+//Appel de la fonction launchModal sur une écoute d'evt sur le bouton contactez-moi
+ModalBtn.addEventListener("click", displayModal);
+
+//Déclaration de la fonction destinée à insérer le nom dans la modale
+function insertPhotographName(object) {
+  // On récupère le nom par la méthode du Destructuring
+  const { name } = object;
+
+  // On récupère l elt DOM à alimenter
+  const modalTitle = document.querySelector(".modal-title");
+  modalTitle.innerHTML = `Contactez-moi<br>${name}`;
+}
+
+//APPEL de la fonction d'insertion du nom
+insertPhotographName(photographerInfo);
+
+function consolLogModalFormData(event) {
+  // On empêche le comporte standard de la fonction
+  event.preventDefault();
+
+  // On récupère nos données que l'on stocke dans différentes constantes
+  const modalForm = document.getElementById("modalForm");
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const message = document.getElementById("message");
+
+  // On envoie les données les données récupérées par le biais d'un objet
+  console.log({
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    message: message.value,
+  });
+  //Je vide les données pour laisser les champs libres pour une nouvelle saisie
+  modalForm.reset();
+  //On ferme la modale
+  closeModal();
+}
+
+//On appelle la fonction d'envoi des données à travers un EventListener
+const modalForm = document.getElementById("modalForm");
+  modalForm.addEventListener("submit", consolLogModalFormData);
