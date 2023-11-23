@@ -2,12 +2,15 @@ import { getPhotographerInfo } from "../utils/getPhotographerInfo.js";
 import { getPhotographerMedia } from "../utils/getPhotographerMedia.js";
 import { mediaFactory } from "../factories/mediaFactory.js";
 
-//Récupération des données
+
+/*****************************************
+* Récupération des données
+*****************************************/
 //On récupère toutes les informations du photographe dont l'ID correspond
 const photographerInfo = await getPhotographerInfo();
 //on récupère tous les media du photographe en question
 const photographerMedia = await getPhotographerMedia();
-console.log(photographerMedia)
+
 
 
   /*****************************************
@@ -20,7 +23,7 @@ function displayFirstSection(data) {
    const { name, city, country, tagline, portrait } = data;
    //On récupère main
    const mainElt = document.querySelector("main");
-   // On affiche le header 
+   // On affiche le header
    mainElt.innerHTML += `
    <section class="photograph-header">
      <div class="photograph-info">
@@ -45,10 +48,10 @@ function displaySecondSection() {
           <option class="dropdown-options" value="Popularité">Popularité</option>
           <option class="dropdown-options" value="Date">Date</option>
           <option class="dropdown-options" value="Titre">Titre</option>
-        </select>          
+        </select>
         <i class="fa-solid fa-chevron-down"></i>
-        <i class="fa-solid fa-chevron-up hidden"></i>          
-      </div>  
+        <i class="fa-solid fa-chevron-up hidden"></i>
+      </div>
   </section>
 `;
 }
@@ -61,7 +64,7 @@ function displayThirdSection(data) {
   mediaSection.className = "media-section";
   // On parcourt le tableau reçu
   data.forEach((media) => {
-      // Créer un modèle de cartes       
+      // Créer un modèle de cartes
       const mediaCardModel = mediaFactory(media);
       // On récupère l'élément DOM
       const mediaCardDOM = mediaCardModel.getMediaCardDOM();
@@ -75,8 +78,8 @@ function displayThirdSection(data) {
 async function displayAll(data, databis) {
   displayFirstSection(data);
   displaySecondSection();
-  displayThirdSection(databis); 
-  
+  displayThirdSection(databis);
+
 }
 // Appel de la fonction générale d'affichage
 displayAll (photographerInfo,photographerMedia)
@@ -86,7 +89,7 @@ displayAll (photographerInfo,photographerMedia)
 *****************************************/
 
   /*******************
-* Gestion du sens du chevron
+* Gestion du sens du chevron sur le menu déroulant
 **********************/
 
 // Fonction de gestion du sens du chevron pour le menu déroulant
@@ -188,7 +191,7 @@ https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-ave
 const ModalBtn = document.getElementById("contactModalBtn");
 
 //Appel de la fonction launchModal sur une écoute d'evt sur le bouton contactez-moi
-ModalBtn.addEventListener("click", displayModal);
+ModalBtn.addEventListener("click", displayModalContact);
 
 //Déclaration de la fonction destinée à insérer le nom dans la modale
 function insertPhotographName(object) {
@@ -204,7 +207,7 @@ function insertPhotographName(object) {
 insertPhotographName(photographerInfo);
 
 function consolLogModalFormData(event) {
-  // On empêche le comporte standard de la fonction
+  // On empêche le comportement standard de la fonction
   event.preventDefault();
 
   // On récupère nos données que l'on stocke dans différentes constantes
@@ -224,13 +227,16 @@ function consolLogModalFormData(event) {
   //Je vide les données pour laisser les champs libres pour une nouvelle saisie
   modalForm.reset();
   //On ferme la modale
-  closeModal();
+  closeModalContact();
 }
 
-//On appelle la fonction d'envoi des données à travers un EventListener
+//Appel de la fonction d'envoi des données à travers un EventListener
 const modalForm = document.getElementById("modalForm");
 modalForm.addEventListener("submit", consolLogModalFormData);
-  
+
+//Appel de la fonction de fermeture de la modale de contact
+const modalCloseBtn = document.getElementById("modalCloseBtn");
+modalCloseBtn.addEventListener("click", closeModalContact)
 
   /*******************
 * MODALE _ Etape 7 : Gérer les médias de la Lightbox
@@ -240,13 +246,13 @@ modalForm.addEventListener("submit", consolLogModalFormData);
 // Fonction d'affichage des medias dans la ligthbox-modal_Définition et appel
 /********************/
 
-//On initialise la variable currentLightboxMediaId à 0
+//On déclare et on initialise la variable currentLightboxMediaId à 0
 // Cette variable va nous permettre de faire fonctionner les boutons droite_gauche de notre carroussel plus tard
 let currentLightboxMediaId = 0;
 
 //Definition de la fonction d'affichage des medias dans la lightbox-modal à partir de son ID
-async function renderLightBoxMedia(mediaId) {  
-  
+async function renderLightBoxMedia(mediaId) {
+
   // Ici on va rechercher dans le tableau photographerMedia, le media qui correspond à l'id mediaId
   const mediaObject = await photographerMedia.find(
     // Faut il utiliser == ou ===? Attention à la conversion
@@ -288,17 +294,17 @@ const mediaCardButtons = document.querySelectorAll(".media-card-button");
     });
   });
 
-//Appel de la fonction Modal du media sur écoute du bouton de fermeture  
+//Appel de la fonction Modal du media sur écoute du bouton de fermeture
 const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
   lightboxCloseBtn.addEventListener("click", () => {
     closeModalMedia();
-  }); 
+  });
 
-  // displayModalMedia() et closeModalMedia() ont été déclarées dans contactForm.js
+  // displayModalMedia() et closeModalMedia() ont été définies dans contactForm.js
 
 /********************/
 // Bouton suivant du caroussel_Définition et appel
-/********************/  
+/********************/
 
 //Definition de la fonction amenant le caroussel au media suivant
 function nextLightBoxMedia() {
@@ -321,7 +327,7 @@ function nextLightBoxMedia() {
 //Appel à la fonction affichant l'elt suivant par l'ecoute du bouton de la flêche de droite
 const nextBtn = document.getElementById("lightboxNextBtn");
 nextBtn.addEventListener("click", nextLightBoxMedia);
-  
+
 /********************/
 // Bouton précédent du caroussel _ Définition et appel
 /********************/
@@ -343,12 +349,49 @@ function previousLightBoxMedia() {
     const previousMediaId = photographerMedia[photographerMedia.length - 1].id;
     renderLightBoxMedia(previousMediaId);
   }
-} 
+}
 
 //Appel à la fonction affichant l element précédent par l'ecoute du bouton de la flêche de gauche
 const previousBtn = document.getElementById("lightboxPreviousBtn");
 previousBtn.addEventListener("click", previousLightBoxMedia);
 
+  /*******************
+* LIKES _ Etape 8 : Créer la modale de contact _ Definition et appel
+**********************/
+
+//Defintion de la fonction
+//La fonction met à jour le nombre de likes ainsi que l'icone (plein ou vide)
+function renderLikes() {
+  //On récupère l'elt span
+  const mediaLikeSpanElt = this.parentNode.firstElementChild;
+  console.log(mediaLikeSpanElt);
+  //On récupère l'icône
+  const mediaLikeIconElt = this.firstElementChild;
+  console.log(mediaLikeIconElt)
+  //Si le coeur était initialement vide
+  if (mediaLikeIconElt.classList.contains("fa-regular")) {
+    //On récupère le chiffre contenu dans le span, on le convertit en nombre et le stocke dans une nouvelle variable
+    let mediaLikeCount = Number(mediaLikeSpanElt.textContent);
+    // On incrémente la variable
+    mediaLikeCount++;
+    // On place cette nouvelle valeur dans notre variable
+    mediaLikeSpanElt.textContent = mediaLikeCount;
+    // On passe du coeur vide au coeur plein
+    mediaLikeIconElt.classList.replace("fa-regular", "fa-solid");
+  } //Sinon, on décrémente en utilisant la même logique
+    else if (mediaLikeIconElt.classList.contains("fa-solid")) {
+    let mediaLikeCount = Number(mediaLikeSpanElt.textContent);
+    mediaLikeCount--;
+    mediaLikeSpanElt.textContent = mediaLikeCount;  
+    mediaLikeIconElt.classList.replace("fa-solid", "fa-regular");
+  }
+}
+
+//Appel de la fonction sur cliques sur les boutons "media-like-button"
+const mediaCardLikeButtons = document.querySelectorAll(".media-like-button");
+  mediaCardLikeButtons.forEach((button) => {
+    button.addEventListener("click", renderLikes);
+  });
 
 
 

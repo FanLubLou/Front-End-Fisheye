@@ -1,6 +1,7 @@
 /*****************************************
 * REINITIALISATION DE CERTAINS ELEMENTS HTML 
 *****************************************/
+*,
 *{
    box-sizing: border-box; 
    margin: 0;
@@ -171,7 +172,9 @@ p {
     text-align: center;
   }
 
-
+/***************************************************************************************
+* PAGE PHOTOGRAPHE _ STYLES SPECIFIQUES
+****************************************************************************************/
 
 
 /*****************************************
@@ -235,6 +238,7 @@ margin-top: 1rem;
   /*****************************************
 * PAGE PHOTOGRAPHE _ La partie tri
 *****************************************/
+
 .sortingout{
     display: flex;
     flex-direction: row;
@@ -315,7 +319,7 @@ select:focus {
 
 
 /*****************************************
-* ELEMENTS CSS SECTION ET MEDIA
+* ELEMENTS CSS_SECTION ET MEDIA
 *****************************************/
 
 .media-section {
@@ -325,11 +329,16 @@ select:focus {
     gap: 2rem 1rem;
     padding: 2em 0;
   }
+  .media-section article{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
   .media-card {
     display: flex;
     flex-flow: column nowrap;
     width: 35rem;
     max-width: 350px;
+    margin-bottom: 0;
   }
   .media-card-button {
     border: none;
@@ -339,6 +348,7 @@ select:focus {
     
   }
   .media-card-img, .media-card-video {
+    display: block;
     width: 35rem;
     height: 30rem;
     -o-object-fit: cover;
@@ -357,7 +367,7 @@ select:focus {
   .media-card-title {
     max-width: 80%;
     font-weight: 400;
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     color: #911c1c;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -369,14 +379,14 @@ select:focus {
   }
   .media-like-count {
     font-weight: 400;
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     margin-right: 0.2em;
     color: #911c1c;
   }
   .media-like-button {
     border: none;
     background-color: transparent;
-    font-size: 2.2rem;
+    font-size: 1.5rem;
     color: #911c1c;
     cursor: pointer;
   }
@@ -385,55 +395,49 @@ select:focus {
 * ETAPE 6 _ La modale
 *****************************************/
 
-/***************************************************************************************
-* PAGE PHOTOGRAPHE _ STYLES SPECIFIQUES
-****************************************************************************************/
+
 .bground {
     display: none;
     position: fixed;
-    z-index: 1;
+    /* z-index: 1; */
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
-    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     background-color: rgba(26, 39, 156, 0.4);
   }
 
 #contact_modal {
-
     position: fixed;
-    left:0;
-    top: 60px;
-    height: 60rem;
-    width: 50%;
-    overflow: auto;
-
-}
-.modal {
+    /* left:0; */
+    bottom: 3.8rem;
+    top: 3.8rem;   
+    width: 50%;    
+    margin: auto;
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 35px;
-    margin: auto;
+    padding: 2rem;
 }
+
 .modal header {
-    
     padding-top: 0px;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 1em;    
+    margin-bottom: 0;    
 }
 .modal-title {
     color: black;
     vertical-align: top;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 400;
     text-align: left;
   }
@@ -572,7 +576,7 @@ form input {
     position: absolute;
     top: 0;
     left: 0;
-    width: 1.5rem;
+    width: rem;
     height: 1.5rem;
     border: none;
     background-color: transparent;

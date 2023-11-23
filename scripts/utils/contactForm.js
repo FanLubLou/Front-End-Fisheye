@@ -1,14 +1,14 @@
 // Les modifications apportées ici sont dans le cadre l'étape #6
-function displayModal() {
+function displayModalContact() {
     //Je récupère l'élément DOM bground
     const bGround = document.querySelector(".bground");
     //On les affiche
-    bGround.style.display = "block";
+    bGround.style.display = "flex";
     
     //Met à jour les attributs pour l'accessibilité
 
     //Et pour mettre à jour son attribut, on récupère les elts du DOM
-    const modal = document.getElementById("contactModal");
+    const modal = document.getElementById("contact_modal");
     const header = document.querySelector("header");
     const main = document.querySelector("main");
     const footer = document.querySelector("footer");
@@ -21,13 +21,13 @@ function displayModal() {
     footer.setAttribute("aria-hidden", "true");
 }
 
-function closeModal() {
+function closeModalContact() {
     //On récupère l'elt DOM bground pour retirer son affichage
     const bGround = document.querySelector(".bground");
     bGround.style.display = "none";
 
     //Et pour mettre à jour son attribut, on récupère les elts du DOM
-    const modal = document.getElementById("contactModal");
+    const modal = document.getElementById("contact_modal");
     const header = document.querySelector("header");
     const main = document.querySelector("main");
     const footer = document.querySelector("footer");
