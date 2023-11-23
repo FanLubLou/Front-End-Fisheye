@@ -9,6 +9,7 @@ const photographerInfo = await getPhotographerInfo();
 const photographerMedia = await getPhotographerMedia();
 console.log(photographerMedia)
 
+
   /*****************************************
 * AFFICHAGE des SECTIONS
 *****************************************/
@@ -228,4 +229,128 @@ function consolLogModalFormData(event) {
 
 //On appelle la fonction d'envoi des données à travers un EventListener
 const modalForm = document.getElementById("modalForm");
-  modalForm.addEventListener("submit", consolLogModalFormData);
+modalForm.addEventListener("submit", consolLogModalFormData);
+  
+
+  /*******************
+* MODALE _ Etape 7 : Gérer les médias de la Lightbox
+**********************/
+
+/********************/
+// Fonction d'affichage des medias dans la ligthbox-modal_Définition et appel
+/********************/
+
+//On initialise la variable currentLightboxMediaId à 0
+// Cette variable va nous permettre de faire fonctionner les boutons droite_gauche de notre carroussel plus tard
+let currentLightboxMediaId = 0;
+
+//Definition de la fonction d'affichage des medias dans la lightbox-modal à partir de son ID
+async function renderLightBoxMedia(mediaId) {  
+  
+  // Ici on va rechercher dans le tableau photographerMedia, le media qui correspond à l'id mediaId
+  const mediaObject = await photographerMedia.find(
+    // Faut il utiliser == ou ===? Attention à la conversion
+    (media) => media.id == mediaId
+  );
+
+  // On récupère les éléments qui nous interessent par la méthode du Destructuring
+  const { title, photographerId, image, video } = mediaObject;
+
+  // On récupère l'elt DOM pour afficher notre media au bon endroit
+  const lightboxMedia = document.getElementById("lightboxMedia");
+
+  // En fonction du format image ou video, on insert un bloc différent
+  if (image) {
+    lightboxMedia.innerHTML = `
+      <img class="lightbox-img" src="assets/images/${photographerId}/${image}" alt="${title}">
+      <figcaption class="lightbox-caption">${title}</figcaption>
+  `;
+  }
+
+  if (video) {
+    lightboxMedia.innerHTML = `
+      <video class="lightbox-video" title="${title}" controls>
+        <source src="assets/images/${photographerId}/${video}" type="video/mp4">
+      </video>
+      <figcaption class="lightbox-caption">${title}</figcaption>
+  `;
+  }
+  // On met à jour la variable currentMediaId variable with the current lightbox media id
+  currentLightboxMediaId = mediaId;
+}
+//Appel de la fonction d'affichage des medias dans la lightbox-modal sur écoute d'un clic sur l'image
+const mediaCardButtons = document.querySelectorAll(".media-card-button");
+  mediaCardButtons.forEach((card) => {
+    card.addEventListener("click", () => {
+      const mediaId = card.parentElement.id;
+      renderLightBoxMedia(mediaId);
+      displayModalMedia();
+    });
+  });
+
+//Appel de la fonction Modal du media sur écoute du bouton de fermeture  
+const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
+  lightboxCloseBtn.addEventListener("click", () => {
+    closeModalMedia();
+  }); 
+
+  // displayModalMedia() et closeModalMedia() ont été déclarées dans contactForm.js
+
+/********************/
+// Bouton suivant du caroussel_Définition et appel
+/********************/  
+
+//Definition de la fonction amenant le caroussel au media suivant
+function nextLightBoxMedia() {
+  // Ici on cherche à savoir où se trouve le media actuel dans le tableau photographerMedia
+  //afin de savoi si on passe au suivant ou si on revient au premier
+  const currentIndex = photographerMedia.findIndex(
+    (media) => media.id == currentLightboxMediaId
+  );
+
+  // Si le media actuel n'est pas le derneir, on affiche l'elt suivant
+  if (currentIndex < photographerMedia.length - 1) {
+    const nextMediaId = photographerMedia[currentIndex + 1].id;
+    renderLightBoxMedia(nextMediaId);
+    // Si on est le dernier element, on recommence depuis le début
+  } else {
+    const nextMediaId = photographerMedia[0].id;
+    renderLightBoxMedia(nextMediaId);
+  }
+}
+//Appel à la fonction affichant l'elt suivant par l'ecoute du bouton de la flêche de droite
+const nextBtn = document.getElementById("lightboxNextBtn");
+nextBtn.addEventListener("click", nextLightBoxMedia);
+  
+/********************/
+// Bouton précédent du caroussel _ Définition et appel
+/********************/
+
+//Definition de la fonction amenant le carouse au media précédant
+function previousLightBoxMedia() {
+  // Ici on cherche à savoir où se trouve le media actuel dans le tableau photographerMedia
+  //afin de savoir si on passe au précédent ou si on revient au dernier
+  const currentIndex = photographerMedia.findIndex(
+    (media) => media.id == currentLightboxMediaId
+  );
+
+  // Si on n'est pas rendu au premier, on revient au précédent
+  if (currentIndex > 0) {
+    const previousMediaId = photographerMedia[currentIndex - 1].id;
+    renderLightBoxMedia(previousMediaId);
+    // Si on est rendu au premier, le bouton nous amènera au dernier media du tableau
+  } else {
+    const previousMediaId = photographerMedia[photographerMedia.length - 1].id;
+    renderLightBoxMedia(previousMediaId);
+  }
+} 
+
+//Appel à la fonction affichant l element précédent par l'ecoute du bouton de la flêche de gauche
+const previousBtn = document.getElementById("lightboxPreviousBtn");
+previousBtn.addEventListener("click", previousLightBoxMedia);
+
+
+
+
+
+
