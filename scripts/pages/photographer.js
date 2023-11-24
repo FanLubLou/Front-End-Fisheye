@@ -14,7 +14,7 @@ const photographerMedia = await getPhotographerMedia();
 
 
   /*****************************************
-* AFFICHAGE des SECTIONS
+* AFFICHAGE des trois SECTIONS et du footer. Definitions et appel des 4 fonctions en même temps à la fin
 *****************************************/
 
 // Definition des fonctions d affichage des trois sections séparément
@@ -74,15 +74,46 @@ function displayThirdSection(data) {
     });
 }
 
+//Affichage du footer
+function displayPhotographFooter(object) {
+  // Ici, on va avoir besoin du prix. On utilise la méthode du destructuring
+  const { price } = object;
+  // On constitue une NodeList en récupérant tous les elts du DOM ayant la classe media-like-count
+  const mediaLikeCount = document.querySelectorAll(".media-like-count");
+  // On va additionner les likes. On déclare et initialise à 0 une variable locale totalMediaLikeCount
+  var totalMediaLikeCount = 0;
+  // On va récupérer dans chacun des elts le texte, que l'on va transformer en nombre entier et additionner
+  mediaLikeCount.forEach((media) => {
+    totalMediaLikeCount += Number(media.textContent);
+  });
+  
+  // On créé le bloc utilisant nos variables à insérer
+  const photographFooter = `
+    <aside class="footer">
+      <div class="footer-container">
+        <span class="footer-likes" id="totalLikesCount">${totalMediaLikeCount}</span>
+        <i class="fa-solid fa-heart"></i>
+      </div>
+      <p class="footer-p">${price} € / jour</p>
+    </aside>
+  `;
+
+  // On insert notre bloc dans le footer 
+  const footerEl = document.querySelector("footer");
+  footerEl.innerHTML = photographFooter;
+
+}
+
 //Définition de la fonction générale d'affichage
-async function displayAll(data, databis) {
+async function displayAll(data, databis, object) {
   displayFirstSection(data);
   displaySecondSection();
   displayThirdSection(databis);
+  displayPhotographFooter(object)
 
 }
 // Appel de la fonction générale d'affichage
-displayAll (photographerInfo,photographerMedia)
+displayAll (photographerInfo,photographerMedia,photographerInfo)
 
   /*****************************************
 * PARTIE TRI
@@ -378,12 +409,15 @@ function renderLikes() {
     mediaLikeSpanElt.textContent = mediaLikeCount;
     // On passe du coeur vide au coeur plein
     mediaLikeIconElt.classList.replace("fa-regular", "fa-solid");
+    //On relance l'affichage du footer
+    displayPhotographFooter(photographerInfo);
   } //Sinon, on décrémente en utilisant la même logique
     else if (mediaLikeIconElt.classList.contains("fa-solid")) {
     let mediaLikeCount = Number(mediaLikeSpanElt.textContent);
     mediaLikeCount--;
     mediaLikeSpanElt.textContent = mediaLikeCount;  
     mediaLikeIconElt.classList.replace("fa-solid", "fa-regular");
+    displayPhotographFooter(photographerInfo);
   }
 }
 

@@ -1,13 +1,10 @@
 /*****************************************
 * REINITIALISATION DE CERTAINS ELEMENTS HTML 
 *****************************************/
-*,
 *{
    box-sizing: border-box; 
    margin: 0;
-   padding: 0;
-    /* j'interdis ici les barres de défilement */
-   
+   padding: 0;  
 }
 
 h1,
@@ -20,26 +17,26 @@ p{
     line-height: normal;
 }
 
-
 h1,
 h2,
 h3,
 p{
     margin: 0;
 }
+
 h4{
     margin: 10px;    
 }
-a {
+
+a{
     text-decoration: none;
 }
-
+/* Pour le menu déroulant */
 select{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
- }
-
+}
  select:focus
 {
     outline: none;
@@ -48,7 +45,7 @@ select{
 main{
     margin: 0 auto;    
 }
-
+/* Pour les modales de contact et d'affichage des media */
 dialog {
     border: none;
     margin: auto;
@@ -57,13 +54,11 @@ dialog {
 /*****************************************
 * ELEMENTS GLOBAUX
 *****************************************/
-
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0 auto;
     font-size: 1.6rem;
-    width: 80%;
-  
+    width: 80%; 
 }
 
 html,
@@ -390,6 +385,47 @@ select:focus {
     color: #911c1c;
     cursor: pointer;
   }
+
+/*****************************************
+* ETAPE 5 _ Création de l'encart affichant tarif journalier et nombre de likes
+*****************************************/
+
+.footer {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  right: 10%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 23.5rem;
+  height: 5.5rem;
+  padding: 1em;
+  background: #db8876;
+  color: #000000;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 2.5rem;
+}
+.footer-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-size: 1.5rem
+}
+.footer-p {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.footer-likes {
+  
+  margin-right: 0.5em;
+}
+
+
+
 
 /*****************************************
 * ETAPE 6 _ La modale
