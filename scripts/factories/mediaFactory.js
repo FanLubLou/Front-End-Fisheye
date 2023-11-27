@@ -20,7 +20,7 @@ export function mediaFactory(data) {
         <div class="media-like-container">
           <span class="media-like-count">${likes}</span>
           <button class="media-like-button" aria-label="Bouton de likes">
-            <i class="media-like-logo fa-heart fa-regular"></i>
+            <i class="fa-heart fa-regular"></i>
           </button>
         </div>
       </section>
@@ -38,7 +38,7 @@ export function mediaFactory(data) {
         <div class="media-like-container">
           <span class="media-like-count">${likes}</span>
           <button class="media-like-button" aria-label="Bouton de likes">
-          <i class="media-like-logo fa-heart fa-regular"></i>
+          <i class="fa-heart fa-regular"></i>
           </button>
         </div>
       </section>

@@ -32,7 +32,7 @@ a{
     text-decoration: none;
 }
 /* Pour le menu déroulant */
-select{
+/* select{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -40,8 +40,21 @@ select{
  select:focus
 {
     outline: none;
+} */
+
+/* design system */
+:root {
+  --Dark-Red : #901C1C;
+  --Red-Orange: #D3573C;
+  --Dark-Grey:#757575;
+  --light-Grey:#C4C4C4;
+  --Pink-light: #DB8876;  
+  
 }
 
+/*****************************************
+* ELEMENTS GLOBAUX
+*****************************************/
 main{
     margin: 0 auto;    
 }
@@ -50,93 +63,84 @@ dialog {
     border: none;
     margin: auto;
   }
-
-/*****************************************
-* ELEMENTS GLOBAUX
-*****************************************/
+/* Pour avoir le body centré gauche_droite */
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0 auto;
-    font-size: 1.6rem;
-    width: 80%; 
+    width: 80%;
+       
 }
-
 html,
 body {
   height: 100%;
 }
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2em 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em 0;
 }
 
-h1 {
-    color: #901C1C;
-    /* margin-right: 100px; */
-}
-
-h2 {
-    color: #D3573C;
-    font-size: 2.25rem;
-    
-
-}
-
+h1,
 h3 {
-    color: #901C1C;
-    font-size: O.813px;
-   }
-
+  color: var(--Dark-Red);    
+}
+h1 {
+font-size: 2.25rem;
+}
+h2 {
+  color: var(--Red-Orange);
+  font-size: 2.25rem;
+}
+h3 {
+  font-size: 0.813rem;
+}
 h4 {
-    color: #000;
-    font-size: 0.625rem;
+  color: black;
+  font-size: 0.625rem;
 }
-
 p {
-    color: #757575;
-    text-align: center;
-    font-size: 0.563rem;
+  color: var(--Dark-Grey);
+  text-align: center;
+  font-size: 0.563rem;
 }
-
 .logo {
-    height: 50px;
+  height: 50px;
 }
 
 /*****************************************
 * PAGE D ACCUEIL _ STYLES SPECIFIQUES
 *****************************************/
 
-.title {
-    color: #901c1c;
-    font-size: 2.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 17.625rem;
     row-gap: 5rem;
-    margin-top: 6.25px;
+    margin-top: 7.125rem;
 }
 
 .photographer_section article {
-    justify-self: center;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    /* justify-self s'utilise dans le contexte des conteneurs de grille _ On centre l'elt horizontalement */
+    justify-self: center;
     flex-direction: column;
     /* Pour forcer le texte à rester sur une ligne */
     white-space: nowrap;
 }
 
-
+.photographer-card-link {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
 .image-container {
     height: 200px;
@@ -145,27 +149,20 @@ p {
     border-radius: 100px;
     overflow: hidden;
     background: #C4C4C4;
-    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25));
-    
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25));    
 }
 
 .photographer_section article img {
     height: 170%;
     width: 170%;
+    /* pour opera */
+    -o-object-fit: cover;
     object-fit:cover;
     position : absolute;
     left: -70px;
     top: -30px;    
     }
 
-.photographer-card-link {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    text-align: center;
-  }
 
 /***************************************************************************************
 * PAGE PHOTOGRAPHE _ STYLES SPECIFIQUES
@@ -187,43 +184,50 @@ p {
     padding: 3.125rem;
     margin-bottom: 2em;
 }
+.photograph-info {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;    
+}
+
+.photograph-name {
+  color: var(--Red-Orange);
+  font-size: 4rem;
+}
+
+.photograph-location {
+  color: var(--Dark-Red);
+  font-size: 2rem;
+}
+
+.photograph-tagline {
+  color: #000000;
+  font-size: 1.125rem;
+  margin-top: 1rem;
+}
 
 .contact_button {
     font-size: 1.25rem;
     font-weight: bold;
     color: white;
-    padding: 11px;
-    width: 170px;
-    height: 69px;
+    padding: 0.688rem;
+    width: 10.625rem;
+    height: 4.313rem;
     border: none;
-    background-color: #901C1C;
+    background-color:var(--Dark-Red);
     border-radius: 5px;
     cursor: pointer;
 }
-.photograph-info {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: flex-start;
-    
+
+.contact_button:hover,
+.contact_button:focus{
+  background-color: var(--Red-Orange);
 }
-.photograph-name {
-    color: #d3573c;
-    font-size: 4rem;
-}
-.photograph-location {
-color: #901c1c;
-font-weight: 400;
-font-size: 2rem;
-}
-.photograph-tagline {
-color: #000000;
-font-weight: 400;
-font-size: 1.125rem;
-margin-top: 1rem;
-}
+
 .photograph-img {
     height: 12.5rem;
     width: 12.5rem;
+    /* pour opera */
     -o-object-fit: cover;
        object-fit: cover;
     border-radius: 50%;
@@ -238,95 +242,113 @@ margin-top: 1rem;
     display: flex;
     flex-direction: row;
     gap: 25px;
-    align-items: center;
-    
+    align-items: center;    
 }
 
 .sortingOut-Comment {
     font-size: 1.125rem;
     font-weight: 700;
+    color: black;
 }
-.select_container {
-    display: flex;
-    align-items: center;
-    width: 10.625rem;
-    height: 3.5rem;
-    background-color: #901c1c;
-    color: #ffffff;
-    border-radius: 0.5rem;
-    border: 1rem solid #901c1c
+.custom-select {
+  position: relative;
+  width: 10.625rem;
+  height: 4.3rem;
+  font-family: arial;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.dropdown {
-    background-color: transparent;
-    color: #ffffff;
-    font-size: 1.125rem;
-    font-weight: 700;
-    border: transparent;
-            
+.custom-select select {
+  display: none; /*hide original SELECT element: */
 }
+
+.select-selected {
+  background-color: var(--Dark-Red);
   
-/* .dropdown-options */
-select:focus {
-    /* position: relative; */
-    font-family: "DM Sans";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 1.125rem;
-    background-color: #901c1c;
-    color: #ffffff;
-    width: 10.625rem;
-    height: 3.5rem;
-    /* height: 10rem; */
-    outline: none;
-    border-radius: 0.5rem;
-    border: 1rem solid #901c1c
-    
-  }
+  
 
-.fa-chevron-down,
-.fa-chevron-up {
-    position: absolute;
-    left: 350px;
-    margin-left: 20px;
-    /* z-index: 100; */
+}
+
+.select-selected i {
+  margin-left: 5px;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: '';
+  top: 33px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+  z-index: 100;
+   
+}
+#date {
+  text-decoration: underline;
+  color: black
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 25px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 0.5px solid transparent;
+  /* border-color: white; */
+  cursor: pointer;
+  height: 60px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: var(--Dark-Red);
+  top: 15px;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 
-.fa-chevron-down {     
-    color: white;
-    
-    font-size: 1.25rem;
-}
-
-.fa-chevron-up {
-    /* position: relative; */
-    color: white;
-    font-size: 1.25rem;
-    /* left: 8px;  */
-}
-
-.hidden {
-    display: none;
-    visibility: hidden;
-}
 
 
 
 /*****************************************
-* ELEMENTS CSS_SECTION ET MEDIA
+* SECTION DES MEDIAS
 *****************************************/
 
 .media-section {
     display: grid;
     grid-template-columns: repeat(auto-fill, 20rem);
     justify-content: space-between;
-    gap: 2rem 1rem;
+    gap:  1.25rem 6rem;
     padding: 2em 0;
-  }
-  .media-section article{
-    margin-bottom: 0px;
-    padding-bottom: 0px;
   }
   .media-card {
     display: flex;
@@ -339,8 +361,7 @@ select:focus {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    max-width: 350px;
-    
+    max-width: 350px;    
   }
   .media-card-img, .media-card-video {
     display: block;
@@ -361,11 +382,10 @@ select:focus {
   }
   .media-card-title {
     max-width: 80%;
-    font-weight: 400;
     font-size: 1.5rem;
-    color: #911c1c;
-    text-overflow: ellipsis;
+    color: var(--Dark-Red);
     white-space: nowrap;
+    text-overflow: ellipsis;
     overflow: hidden;
   }
   .media-like-container {
@@ -373,16 +393,15 @@ select:focus {
     flex-flow: row nowrap;
   }
   .media-like-count {
-    font-weight: 400;
     font-size: 1.5rem;
     margin-right: 0.2em;
-    color: #911c1c;
+    color: var(--Dark-Red);
   }
   .media-like-button {
     border: none;
     background-color: transparent;
     font-size: 1.5rem;
-    color: #911c1c;
+    color: var(--Dark-Red);
     cursor: pointer;
   }
 
@@ -402,7 +421,7 @@ select:focus {
   width: 23.5rem;
   height: 5.5rem;
   padding: 1em;
-  background: #db8876;
+  background: var(--Pink-light);
   color: #000000;
   border-radius: 0.5rem;
   font-weight: 500;
@@ -419,8 +438,7 @@ select:focus {
   color: black;
 }
 
-.footer-likes {
-  
+.footer-likes {  
   margin-right: 0.5em;
 }
 
@@ -431,11 +449,9 @@ select:focus {
 * ETAPE 6 _ La modale
 *****************************************/
 
-
 .bground {
     display: none;
     position: fixed;
-    /* z-index: 1; */
     left: 0;
     top: 0;
     height: 100%;
@@ -448,13 +464,12 @@ select:focus {
 
 #contact_modal {
     position: fixed;
-    /* left:0; */
     bottom: 3.8rem;
     top: 3.8rem;   
     width: 50%;    
     margin: auto;
     border-radius: 5px;
-    background-color: #DB8876;
+    background-color: var(--Pink-light);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -474,28 +489,20 @@ select:focus {
     color: black;
     vertical-align: top;
     font-size: 4rem;
-    font-weight: 400;
     text-align: left;
-  }
-.modal-form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;    
 }
 
+.modal-close {
+  width: 5rem;
+  height: 5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
 .modal-label {
     color: #312e2e;
     font-size: 2.25rem;
-  }
-
-.modal-close {
-    width: 5rem;
-    height: 5rem;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-  }
+}
 
 .modal header img {
     cursor: pointer;
@@ -507,6 +514,7 @@ select:focus {
 }
 
 .modal-msg {
+    vertical-align: top;
     height: 14rem;
 }
 
@@ -559,11 +567,7 @@ form input {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 600px;
-    max-height: 200px;
-    
-   
-    
+    max-width: 700px;
 }
 
 .lightbox-container {    
@@ -583,8 +587,7 @@ form input {
   }
   .lightbox-grid2 {
     grid-column: 2;
-        
-    
+           
   }
   .lightbox-grid3 {
     position: relative;
@@ -631,11 +634,11 @@ form input {
     font-size: 1.5rem;
     border: none;
     background-color: transparent;
-    color: #911c1c;
+    color: var(--Dark-Red);
     cursor: pointer;
   }
   .lightbox-caption {
     font-size: 1.5rem;
-    color: #911c1c;
+    color: var(--Dark-Red);
     margin: 0.5em 0;
   }
