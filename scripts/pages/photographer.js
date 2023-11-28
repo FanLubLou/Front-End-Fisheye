@@ -43,13 +43,28 @@ function displaySecondSection() {
   mainElt.innerHTML += `
   <section class="sortingout">
       <p class="sortingOut-Comment"> Trier par </p>
-      <div class="custom-select">
-        <select class="dropdown" id="dropdownMenu" aria-label="Menu de tri">
-          <option class="dropdown-options" value="Popularité">Popularité</option>
-          <option class="dropdown-options" id="date" value="Date">Date</option>
-          <option class="dropdown-options" value="Titre">Titre</option>
-        </select>
-     </div>
+      <div class="filter">
+        <button class="closed-filter" id="closed-filter">
+        <span>Popularité</span>
+        <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="open-filter hidden" id="open-filter">
+          <div class="PopularAndChevron">
+            <button class="filterPopular" role="menuitem">
+              <div class="text-popular">Popularité</div>
+            </button>  
+            <button class="chevronClose">
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          </div>  
+          <button class="filterDate" role="menuitem">
+            <div class="text-date">Date</div>
+          </button>
+          <button class="filterTitle" role="menuitem">
+            <div class="text-title">Titre</div>
+          </button>
+        </div>
+      </div>  
   </section>
 `;
 }
@@ -118,36 +133,58 @@ displayAll (photographerInfo,photographerMedia,photographerInfo)
 *****************************************/
 
   /*******************
-* Gestion du sens du chevron sur le menu déroulant
+* Gestion des fonctions du filtre
 **********************/
+const cFilter = document.getElementById("closed-filter");
+const oFilter = document.getElementById("open-filter");
+const filterDate = document.querySelector(".filterDate");
+const filterTitle = document.querySelector(".filterTitle");
+const chevronClose = document.querySelector(".chevronClose");
+const filterPopular = document.querySelector(".filterPopular");
 
-// Fonction de gestion du sens du chevron pour le menu déroulant
-//On récupère les éléments du DOM
-const chevronDown = document.querySelector(".fa-chevron-down");
-const chevronUp = document.querySelector(".fa-chevron-up");
-const dropdownState = document.querySelector(".dropdown");
+//Defintion de openFilter()
+function openFilter() {
+  cFilter.classList.add("hidden")
+  oFilter.classList.remove("hidden")
+}
+//Appel de openFilter()
+cFilter.addEventListener("click", openFilter);
 
-//On écoute le menu déroulant pour savoir s'il est déplié ou non
-dropdownState.addEventListener("focus", chevronUpfct);
-dropdownState.addEventListener("focus", function (event) {
-  console.log('Nouvelle option sélectionnée:', event.target.value)
-});
-dropdownState.addEventListener("input", chevronDownfct);
-dropdownState.addEventListener("change", chevronDownfct);
-dropdownState.addEventListener("blur", chevronDownfct);
-
-
-
-//On écrit les fonctions qui retire ou ajoute la classe hidden en fonction
-function chevronUpfct() {
-  chevronDown.classList.add("hidden")
-  chevronUp.classList.remove("hidden")
+//Defintion de closeFilter()
+function closeFilter() {
+  oFilter.classList.add("hidden")
+  cFilter.classList.remove("hidden")
 }
 
-function chevronDownfct() {
-  chevronUp.classList.add("hidden")
-  chevronDown.classList.remove("hidden")
+//Appel de la fonction de closeFilter uniquement
+chevronClose.addEventListener("click",closeFilter)
+
+// Defintion de la foncton filterDateAndClose()
+function filterDateAndClose() {
+  sortMediaSection("Date");
+  closeFilter();
 }
+//Appel de la fonction filterDateAndClose
+filterDate.addEventListener("click", filterDateAndClose)
+
+// Defintion de la foncton filterTitleAndClose()
+function filterTitleAndClose() {
+  sortMediaSection("Titre");
+  closeFilter();
+}
+//Appel de la fonction filterTitleAndClose
+filterTitle.addEventListener("click", filterTitleAndClose)
+
+// Defintion de la foncton filterPopularAndClose()
+function filterPopularAndClose() {
+  sortMediaSection("Popularité");
+  closeFilter();
+}
+//Appel de la fonction filterTitleAndClose
+filterPopular.addEventListener("click", filterPopularAndClose)
+
+
+
 
   /*******************
 * TRI _ Etape 9 : Créer le système de tri
@@ -157,11 +194,8 @@ https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-ave
 **********************/
 
 // Definition de la fonction de tri destinée à être appelée par un eventlistener
-async function sortMediaSection() {
-  // Récupération de la valeur choisie par l'utilisateur du <select> _ Menu déroulant
-  const selectedOption = this.value;
+async function sortMediaSection(selectedOption) {
   console.log(selectedOption)
-
   // Tri par popularité
   if (selectedOption == "Popularité") {
     await photographerMedia.sort((a, b) => {
@@ -195,22 +229,10 @@ async function sortMediaSection() {
 
   // Nouvel affichage en fonction du nouveau tableau photographerMedia
     displayThirdSection(photographerMedia);
-
 }
 
 //Appel de la fonction de tri sur l'evenement "change"
-var selectElement = document.querySelector(".custom-select select");
-selectElement.addEventListener("change", function() {
-  var selectedOption = selectElement.options[selectElement.selectedIndex].value;
-  console.log("Option choisie :", selectedOption);
-});
 
-console.log("coucou")
-const dropdownMenu = document.querySelector(".custom-select select");
-dropdownMenu.addEventListener("change", sortMediaSection);
-dropdownMenu.addEventListener("change", function (event) {
-  console.log('Nouvelle option sélectionnée:', event.target.value)
-});
 
   /*******************
 * MODALE _ Etape 6 : Créer la modale de contact
@@ -432,95 +454,6 @@ const mediaCardLikeButtons = document.querySelectorAll(".media-like-button");
     button.addEventListener("click", renderLikes);
   });
 
-
-
-
-function displaySelect() {
-  var x, i, j, l, ll, selElmnt, a, b, c;
-/* Look for any elements with the class "custom-select": */
-x = document.getElementsByClassName("custom-select");
-l = x.length;
-for (i = 0; i < l; i++) {
-  selElmnt = x[i].getElementsByTagName("select")[0];
-  ll = selElmnt.length;
-  /* For each element, create a new DIV that will act as the selected item: */
-  a = document.createElement("DIV");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-  x[i].appendChild(a);
-  /* For each element, create a new DIV that will contain the option list: */
-  b = document.createElement("DIV");
-  b.setAttribute("class", "select-items select-hide");
-  for (j = 0; j < ll; j++) {
-    /* For each option in the original select element,
-    create a new DIV that will act as an option item: */
-    c = document.createElement("DIV");
-    c.innerHTML = selElmnt.options[j].innerHTML;
-    c.addEventListener("click", function(e) {
-        /* When an item is clicked, update the original select box,
-        and the selected item: */
-        var y, i, k, s, h, sl, yl;
-        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-        sl = s.length;
-        h = this.parentNode.previousSibling;
-        for (i = 0; i < sl; i++) {
-          if (s.options[i].innerHTML == this.innerHTML) {
-            s.selectedIndex = i;
-            h.innerHTML = this.innerHTML;
-            y = this.parentNode.getElementsByClassName("same-as-selected");
-            yl = y.length;
-            for (k = 0; k < yl; k++) {
-              y[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
-        }
-        h.click();
-    });
-    b.appendChild(c);
-  }
-  x[i].appendChild(b);
-  a.addEventListener("click", function(e) {
-    /* When the select box is clicked, close any other select boxes,
-    and open/close the current select box: */
-    e.stopPropagation();
-    closeAllSelect(this);
-    this.nextSibling.classList.toggle("select-hide");
-    this.classList.toggle("select-arrow-active");
-
-
-  });
-}
-
-function closeAllSelect(elmnt) {
-  /* A function that will close all select boxes in the document,
-  except the current select box: */
-  var x, y, i, xl, yl, arrNo = [];
-  x = document.getElementsByClassName("select-items");
-  y = document.getElementsByClassName("select-selected");
-  xl = x.length;
-  yl = y.length;
-  for (i = 0; i < yl; i++) {
-    if (elmnt == y[i]) {
-      arrNo.push(i)
-    } else {
-      y[i].classList.remove("select-arrow-active");
-    }
-  }
-  for (i = 0; i < xl; i++) {
-    if (arrNo.indexOf(i)) {
-      x[i].classList.add("select-hide");
-    }
-  }
-}
-
-/* If the user clicks anywhere outside the select box,
-then close all select boxes: */
-document.addEventListener("click", closeAllSelect);
-}
-
-displaySelect();
 
 
 

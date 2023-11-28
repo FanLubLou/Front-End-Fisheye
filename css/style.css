@@ -32,7 +32,7 @@ a{
     text-decoration: none;
 }
 /* Pour le menu déroulant */
-/* select{
+select{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -40,7 +40,7 @@ a{
  select:focus
 {
     outline: none;
-} */
+}
 
 /* design system */
 :root {
@@ -50,6 +50,10 @@ a{
   --light-Grey:#C4C4C4;
   --Pink-light: #DB8876;  
   
+}
+button {
+  text-decoration: none;
+  border: none
 }
 
 /*****************************************
@@ -219,11 +223,6 @@ p {
     cursor: pointer;
 }
 
-.contact_button:hover,
-.contact_button:focus{
-  background-color: var(--Red-Orange);
-}
-
 .photograph-img {
     height: 12.5rem;
     width: 12.5rem;
@@ -242,7 +241,10 @@ p {
     display: flex;
     flex-direction: row;
     gap: 25px;
-    align-items: center;    
+    align-items: baseline; 
+    font-size: 1.125rem;
+    font-weight: 700;
+    position:absolute;       
 }
 
 .sortingOut-Comment {
@@ -250,92 +252,75 @@ p {
     font-weight: 700;
     color: black;
 }
-.custom-select {
+/* .filter {
   position: relative;
+} */
+.closed-filter {
+  height: 4.313rem;
   width: 10.625rem;
-  height: 4.3rem;
-  font-family: arial;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.custom-select select {
-  display: none; /*hide original SELECT element: */
-}
-
-.select-selected {
   background-color: var(--Dark-Red);
-  
-  
-
-}
-
-.select-selected i {
-  margin-left: 5px;
-}
-
-/* Style the arrow inside the select element: */
-.select-selected:after {
-  position: absolute;
-  content: '';
-  top: 33px;
-  right: 20px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-  z-index: 100;
-   
-}
-#date {
-  text-decoration: underline;
-  color: black
-}
-
-/* Point the arrow upwards when the select box is open (active): */
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 25px;
-  right: 20px;
-  z-index: 100;
-}
-
-/* style the items (options), including the selected item: */
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 0.5px solid transparent;
-  /* border-color: white; */
-  cursor: pointer;
-  height: 60px;
-  text-align: center;
   display: flex;
   align-items: center;
-  
+  justify-content: space-around;
+  border-radius: 5px;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  padding: 10px
 }
-
-/* Style items (options): */
-.select-items {
-  position: absolute;
+.open-filter{
+  width: 10.625rem;
+  height: 10.625rem;
   background-color: var(--Dark-Red);
-  top: 15px;
-  left: 0;
-  right: 0;
-  z-index: 99;
-  
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+  z-index: 100;
+}
+.PopularAndChevron {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 15px;
 }
 
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none;
+.filterDate,
+.filterTitle {
+  border-top: 1px solid white;
+  text-align: left;
+}
+.filterPopular,
+.filterDate,
+.filterTitle,
+.chevronClose {
+  background: transparent;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  cursor: pointer
+}
+.text-date,
+.text-title {
+  padding: 20px 0px 0px 10px;
+
 }
 
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+.fa-chevron-down,
+.fa-chevron-up {     
+    color: white;
+    font-size: 1.25rem;
 }
 
-
+.hidden {
+    display: none;
+    visibility: hidden;
+    top: 0;
+}
 
 
 
@@ -349,6 +334,8 @@ p {
     justify-content: space-between;
     gap:  1.25rem 6rem;
     padding: 2em 0;
+    /* C'est le media-section qui gère l'ecart avec le header pour que les outils de tri puissent sortir du flux */
+    margin-top: 6.25rem;
   }
   .media-card {
     display: flex;
