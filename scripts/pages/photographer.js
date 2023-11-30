@@ -36,17 +36,21 @@ function displayFirstSection(data) {
    </section>
  `;
 }
+
+
 function displaySecondSection() {
+  
   //On récupère main
   const mainElt = document.querySelector("main");
+  
   // on affiche le menu déroulant
   mainElt.innerHTML += `
   <section class="sortingout">
       <p class="sortingOut-Comment"> Trier par </p>
       <div class="filter">
         <button class="closed-filter" id="closed-filter">
-        <span>Popularité</span>
-        <i class="fa-solid fa-chevron-down"></i>
+          <span id="ToBeUpdated">Popularité</span>
+          <i class="fa-solid fa-chevron-down"></i>
         </button>
         <div class="open-filter hidden" id="open-filter">
           <div class="PopularAndChevron">
@@ -118,15 +122,15 @@ function displayPhotographFooter(object) {
 }
 
 //Définition de la fonction générale d'affichage
-async function displayAll(data, databis, object) {
+async function displayAll(data, databis,selectedOption, object) {
   displayFirstSection(data);
-  displaySecondSection();
+  displaySecondSection(selectedOption);
   displayThirdSection(databis);
   displayPhotographFooter(object)
 
 }
 // Appel de la fonction générale d'affichage
-displayAll (photographerInfo,photographerMedia,photographerInfo)
+displayAll (photographerInfo,photographerMedia,"Popularité",photographerInfo)
 
   /*****************************************
 * PARTIE TRI
@@ -149,6 +153,9 @@ function openFilter() {
 }
 //Appel de openFilter()
 cFilter.addEventListener("click", openFilter);
+cFilter.addEventListener("click", function () {
+  console.log("le click fonctionne correctement")
+});
 
 //Defintion de closeFilter()
 function closeFilter() {
@@ -160,15 +167,25 @@ function closeFilter() {
 chevronClose.addEventListener("click",closeFilter)
 
 // Defintion de la foncton filterDateAndClose()
-function filterDateAndClose() {
+async function filterDateAndClose() {
+
+  const ToBeChanged = document.getElementById("closed-filter");
+  const spans = ToBeChanged.getElementsByTagName("span");
+  spans[0].textContent = "Date";
   sortMediaSection("Date");
   closeFilter();
+    
+
 }
 //Appel de la fonction filterDateAndClose
 filterDate.addEventListener("click", filterDateAndClose)
 
 // Defintion de la foncton filterTitleAndClose()
 function filterTitleAndClose() {
+  
+  const ToBeChanged = document.getElementById("closed-filter");
+  const spans = ToBeChanged.getElementsByTagName("span");
+  spans[0].textContent = "Titre";
   sortMediaSection("Titre");
   closeFilter();
 }
@@ -177,8 +194,13 @@ filterTitle.addEventListener("click", filterTitleAndClose)
 
 // Defintion de la foncton filterPopularAndClose()
 function filterPopularAndClose() {
-  sortMediaSection("Popularité");
+  
+  const ToBeChanged = document.getElementById("closed-filter");
+  const spans = ToBeChanged.getElementsByTagName("span");
+  spans[0].textContent = "Popularité";
+  sortMediaSection("Popularité")
   closeFilter();
+  
 }
 //Appel de la fonction filterTitleAndClose
 filterPopular.addEventListener("click", filterPopularAndClose)
@@ -194,9 +216,11 @@ https://openclassrooms.com/fr/courses/7697016-creez-des-pages-web-dynamiques-ave
 **********************/
 
 // Definition de la fonction de tri destinée à être appelée par un eventlistener
+
+
 async function sortMediaSection(selectedOption) {
-  console.log(selectedOption)
-  // Tri par popularité
+  
+    // Tri par popularité
   if (selectedOption == "Popularité") {
     await photographerMedia.sort((a, b) => {
       return b.likes - a.likes;
@@ -228,10 +252,28 @@ async function sortMediaSection(selectedOption) {
   mediaSection.remove();
 
   // Nouvel affichage en fonction du nouveau tableau photographerMedia
-    displayThirdSection(photographerMedia);
+  displayThirdSection(photographerMedia);
+
+  //Remise en place des addEventListener étant donné que les sections ont été retirées puis remises en place
+  
+  //Appel de la fonction sur cliques sur les boutons "media-like-button"
+  const mediaCardLikeButtons = document.querySelectorAll(".media-like-button");
+  mediaCardLikeButtons.forEach((button) => {
+    button.addEventListener("click", renderLikes);
+  });
+
+  //Appel de la fonction d'affichage des medias dans la lightbox-modal sur écoute d'un clic sur l'image
+  const mediaCardButtons = document.querySelectorAll(".media-card-button");
+  mediaCardButtons.forEach((card) => {
+    card.addEventListener("click", () => {
+      const mediaId = card.parentElement.id;
+      renderLightBoxMedia(mediaId);
+      displayModalMedia();
+      });
+  });
+  
 }
 
-//Appel de la fonction de tri sur l'evenement "change"
 
 
   /*******************

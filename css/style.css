@@ -261,14 +261,14 @@ p {
   background-color: var(--Dark-Red);
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 5px;
   color: white;
   font-size: 1.125rem;
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  padding: 10px
+  padding: 10px 21px
 }
 .open-filter{
   width: 10.625rem;
@@ -548,6 +548,7 @@ form input {
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
+    z-index: 101;
   }
 
 .lightbox {    
