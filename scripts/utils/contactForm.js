@@ -13,6 +13,9 @@ function displayModalContact() {
     const main = document.querySelector("main");
     const footer = document.querySelector("footer");
 
+    // On met le focus sur la modale
+    modal.focus();
+
     // En mettant aria-hidden sur fales, on indique que la modale est visible
     modal.setAttribute("aria-hidden", "false");
     // A l'inverse, on indique que les autres blocs ne sont pas visibles
@@ -45,11 +48,12 @@ function displayModalMedia() {
     //Je récupère mes éléments à afficher
     const bGroundWhite = document.querySelector(".bGroundWhite");
     const modalMedia = document.getElementById("lightboxModal");
+    
+
     //On les affiche
     bGroundWhite.style.display = "flex";
 
     //Met à jour les attributs pour l'accessibilité
-
     //Et pour mettre à jour son attribut, on récupère les elts du DOM
     const header = document.querySelector("header");
     const main = document.querySelector("main");
