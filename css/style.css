@@ -157,14 +157,37 @@ p {
 }
 
 .photographer_section article img {
-    height: 170%;
-    width: 170%;
+ 
+  /* Meilleurs compromis pour que les photos en très gros plancs comme celui de Tracy Galindo passe */
+    height: 100%;
+    width: 100%;  
     /* pour opera */
     -o-object-fit: cover;
     object-fit:cover;
+    /* position : absolute; */
+    /* left: 0px;
+    top: 0px;  */
+
+    /* Meilleurs réglages pour les photos mode paysage sans Tracy Galindo */
+    /* height: 170%;
+    width: 170%;  */
+    /* pour opera */
+    /* -o-object-fit: cover;
+    object-fit:cover;
     position : absolute;
     left: -70px;
-    top: -30px;    
+    top: -30px;    */
+
+    /* Meilleurs réglages pour les photos mode portrait sans Tracy Galindo */
+    /****
+    height: 150%;
+    width: 150%;
+    -o-object-fit: cover;
+    object-fit:cover;
+    position : absolute;
+    left: -50px;
+    top: -30px;
+    ****/     
     }
 
 

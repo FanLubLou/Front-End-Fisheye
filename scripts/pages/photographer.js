@@ -205,9 +205,6 @@ function filterPopularAndClose() {
 //Appel de la fonction filterTitleAndClose
 filterPopular.addEventListener("click", filterPopularAndClose)
 
-
-
-
   /*******************
 * TRI _ Etape 9 : Créer le système de tri
 Basé sur le cours "Manipulez les listes en JavaScript"
@@ -273,8 +270,6 @@ async function sortMediaSection(selectedOption) {
   });
   
 }
-
-
 
   /*******************
 * MODALE _ Etape 6 : Créer la modale de contact
@@ -399,9 +394,8 @@ const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
   lightboxCloseBtn.addEventListener("click", () => {
     closeModalMedia();
   });
-
-  // displayModalMedia() et closeModalMedia() ont été définies dans contactForm.js
-
+// displayModalMedia() et closeModalMedia() ont été définies dans contactForm.js
+  
 /********************/
 // Bouton suivant du caroussel_Définition et appel
 /********************/
@@ -454,6 +448,31 @@ function previousLightBoxMedia() {
 //Appel à la fonction affichant l element précédent par l'ecoute du bouton de la flêche de gauche
 const previousBtn = document.getElementById("lightboxPreviousBtn");
 previousBtn.addEventListener("click", previousLightBoxMedia);
+
+/********************/
+// Ajout de fonctionnalités de navigation au clavier dans la lightbox 
+// Contraintes imposées en note de réunion
+/********************/
+
+// On écoute le clavier
+document.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "ArrowLeft":
+      previousLightBoxMedia();
+      break;
+    case "ArrowRight":
+      nextLightBoxMedia();
+      break;
+    case "Escape":
+      closeModalMedia();
+      // Si jamais c'est le formulaire est ouvert, la touche échappe la fermera
+      closeModalContact();
+      break;
+  }
+});
+
+
+
 
   /*******************
 * LIKES _ Etape 8 : Créer la modale de contact _ Definition et appel
