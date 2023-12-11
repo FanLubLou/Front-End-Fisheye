@@ -47,7 +47,7 @@ function displaySecondSection() {
   mainElt.innerHTML += `
   <section class="sortingout">
       <p class="sortingOut-Comment"> Trier par </p>
-      <div class="filter">
+      <div class="filter" id="filter">
         <button class="closed-filter" id="closed-filter">
           <span id="ToBeUpdated">Popularité</span>
           <i class="fa-solid fa-chevron-down"></i>
@@ -146,25 +146,34 @@ const filterTitle = document.querySelector(".filterTitle");
 const chevronClose = document.querySelector(".chevronClose");
 const filterPopular = document.querySelector(".filterPopular");
 
+
 //Defintion de openFilter()
 function openFilter() {
-  cFilter.classList.add("hidden")
-  oFilter.classList.remove("hidden")
+  cFilter.classList.add("hidden");
+  oFilter.classList.remove("hidden");
+      
+
 }
 //Appel de openFilter()
 cFilter.addEventListener("click", openFilter);
-cFilter.addEventListener("click", function () {
-  console.log("le click fonctionne correctement")
-});
+
 
 //Defintion de closeFilter()
 function closeFilter() {
-  oFilter.classList.add("hidden")
-  cFilter.classList.remove("hidden")
+  oFilter.classList.add("hidden");
+  cFilter.classList.remove("hidden");
 }
 
-//Appel de la fonction de closeFilter uniquement
-chevronClose.addEventListener("click",closeFilter)
+//Appel de la fonction de closeFilter si on clique sur le chevron
+chevronClose.addEventListener("click", closeFilter);
+//Appel de la fonction de closeFilter si un clic est effectué en dehors du bouton et du contenu
+document.addEventListener("click", function (event) {
+  const isClickInside = cFilter.contains(event.target) || oFilter.contains(event.target);
+  
+  if (!isClickInside) {
+    closeFilter();
+  }
+});
 
 // Defintion de la foncton filterDateAndClose()
 async function filterDateAndClose() {
@@ -370,7 +379,7 @@ async function renderLightBoxMedia(mediaId) {
 
   if (video) {
     lightboxMedia.innerHTML = `
-      <video class="lightbox-video" title="${title}" controls>
+      <video controls autoplay class="lightbox-video" title="${title}" controls>
         <source src="assets/images/${photographerId}/${video}" type="video/mp4">
       </video>
       <figcaption class="lightbox-caption">${title}</figcaption>

@@ -18,7 +18,7 @@ function displayModalContact() {
 
     // En mettant aria-hidden sur fales, on indique que la modale est visible
     modal.setAttribute("aria-hidden", "false");
-    // A l'inverse, on indique que les autres blocs ne sont pas visibles
+    // A l'inverse, on indique que les autres blocs ne sont plus visibles par les technos d'accessibilité
     header.setAttribute("aria-hidden", "true");
     main.setAttribute("aria-hidden", "true");
     footer.setAttribute("aria-hidden", "true");
