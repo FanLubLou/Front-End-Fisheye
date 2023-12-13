@@ -477,6 +477,10 @@ document.addEventListener("keydown", (event) => {
       // Si jamais c'est le formulaire est ouvert, la touche échappe la fermera
       closeModalContact();
       break;
+    //La touche espace semble avoir le même effet que la flêche de droite, je l'empêche
+    case "Space":
+      event.preventDefault();
+      break;
   }
 });
 

@@ -99,16 +99,24 @@ h2 {
   font-size: 2.25rem;
 }
 h3 {
-  font-size: 0.813rem;
+  font-size: 1.125 rem;
+  /* Si on suit la maquette */
+  /* font-size: 0.813rem; */
 }
 h4 {
   color: black;
-  font-size: 0.625rem;
+  /* On recommande */
+  font-size: 1 rem;
+  /* Si on suit la maquette */
+  /* font-size: 0.625rem; */
 }
 p {
   color: var(--Dark-Grey);
   text-align: center;
-  font-size: 0.563rem;
+  /* Pour être au moins à 14px */
+  font-size: 0.875rem;
+  /* Si on suit la maquette */
+  /* font-size: 0.563rem; */
 }
 .logo {
   height: 50px;
