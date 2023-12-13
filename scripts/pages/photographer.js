@@ -8,7 +8,7 @@ import { mediaFactory } from "../factories/mediaFactory.js";
 *****************************************/
 //On récupère toutes les informations du photographe dont l'ID correspond
 const photographerInfo = await getPhotographerInfo();
-//on récupère tous les media du photographe en question
+//on récupère tous les media du photographe en questdiion
 const photographerMedia = await getPhotographerMedia();
 
 

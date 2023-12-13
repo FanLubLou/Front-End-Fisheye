@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Détails du photographe chez Fisheye.">
     <meta name="keywords" content="Photographes, Art, Photographies">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/06cf8953cf.js" crossorigin="anonymous"></script>    
     <title>Fisheye - photographes _ JC</title>
   </head>
   <body>
     <!-- Etape#3_ ajout de l'attribut role pour indiquer que nous sommes sur la bannière -->
-   <header role="banner">
+    <!-- Etape#3_ Je retire finalement cet attribut selon validator.w3.org --A discuter -->
+   <header>
    <!-- Etape#3_ajout de l'attribut aria-label-->      
       <a href="./index.html" aria-label="Lien vers la page d'accueil">
-        <img src="assets/images/logo.png" class="logo" alt="logo fisheye "/>
+        <img src="assets/images/logo.png" class="logo" alt="logo fisheye ">
       </a>
     </header>
-    <!-- Etape#3_ajout de l'attribut aria-label-->
+    <!-- Etape#3_ajout de l'attribut aria-label role="main"-->
+    <!-- Etape#3_ajout de l'attribut aria-label role="main"-->
     <main id="main" role="main">
       <!-- Etap#5 Ici viendront s'afficher la section photograph-header puis le menu déroulant -->
       <!-- Etap#5 Ici viendra s'afficher la section destinée aux media -->       
@@ -28,11 +30,11 @@
 
     <!-- Etape#6 _ Insertion de la modale de contact -->
     <div class="bground">
-      <dialog class="modal" id="contact_modal" role="dialog">			
+      <dialog class="modal" id="contact_modal">			
           <header class="modal-header">
             <h2 class="modal-title"></h2>
             <button class="modal-close" aria-label="Bouton de fermeture du modal de contact" id="modalCloseBtn">
-            <img src="assets/icons/close.svg" onclick="closeModalContact()" alt="Fermer la fenêtre" />
+            <img src="assets/icons/close.svg" onclick="closeModalContact()" alt="Fermer la fenêtre">
           </button>
           </header>
           <form class="modal-form" id="modalForm">
