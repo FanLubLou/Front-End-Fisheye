@@ -480,6 +480,7 @@ document.addEventListener("keydown", (event) => {
     //La touche espace semble avoir le même effet que la flêche de droite, je l'empêche
     case "Space":
       event.preventDefault();
+      event.stopPropagation();
       break;
   }
 });
@@ -496,10 +497,10 @@ document.addEventListener("keydown", (event) => {
 function renderLikes() {
   //On récupère l'elt span
   const mediaLikeSpanElt = this.parentNode.firstElementChild;
-  console.log(mediaLikeSpanElt);
+  
   //On récupère l'icône
   const mediaLikeIconElt = this.firstElementChild;
-  console.log(mediaLikeIconElt)
+  
   //Si le coeur était initialement vide
   if (mediaLikeIconElt.classList.contains("fa-regular")) {
     //On récupère le chiffre contenu dans le span, on le convertit en nombre et le stocke dans une nouvelle variable
